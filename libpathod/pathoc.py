@@ -424,7 +424,9 @@ class Pathoc(tcp.TCPClient):
             finally:
                 if resp:
                     lg("<< %s %s: %s bytes" % (
-                        resp.status_code, utils.xrepr(resp.msg), len(resp.content)
+                        resp.status_code, utils.xrepr(resp.msg),
+                        "None" if resp.content is None
+                               else "%s bytes" % (len(resp.content))
                     ))
                     if resp.status_code in self.ignorecodes:
                         lg.suppress()
